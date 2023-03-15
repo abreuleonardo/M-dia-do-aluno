@@ -1,0 +1,92 @@
+package Exercicio;
+import java.util.Scanner;
+
+public class Aluno {
+    private String nome;
+    private int matricula;
+    private String curso;
+    private String[] disciplinas = new String[3];
+    private double[] notas = new double[3];
+
+    // Construtor da classe Aluno
+    public Aluno(String nome, int matricula, String curso, String[] disciplinas, double[] notas) {
+        this.nome = nome;
+        this.matricula = matricula;
+        this.curso = curso;
+        this.disciplinas = disciplinas;
+        this.notas = notas;
+    }
+
+    // Método para verificar se o aluno está aprovado em uma determinada disciplina
+    public boolean estaAprovado(String disciplina) {
+        int index = -1;
+        for (int i = 0; i < disciplinas.length; i++) {
+            if (disciplinas[i].equals(disciplina)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            System.out.println("Disciplina não encontrada.");
+            return false;
+        }
+        if (notas[index] >= 7) {
+            System.out.println("O aluno " + nome + " está aprovado em " + disciplina + " com nota " + notas[index] + ".");
+            return true;
+        } else {
+            System.out.println("O aluno " + nome + " está reprovado em " + disciplina + " com nota " + notas[index] + ".");
+            return false;
+        }
+
+
+    } }
+    
+    
+    
+    
+    
+    
+    
+    package Exercicio;
+import java.util.Scanner;
+public class testeAluno {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Pedindo informações do aluno ao usuário
+        System.out.print("Nome do aluno: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Matrícula do aluno: ");
+        int matricula = sc.nextInt();
+
+        sc.nextLine(); // Consumindo o \n do buffer
+
+        System.out.print("Curso do aluno: ");
+        String curso = sc.nextLine();
+
+        String[] disciplinas = new String[3];
+        double[] notas = new double[3];
+
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Nome da disciplina " + (i+1) + ": ");
+            disciplinas[i] = sc.nextLine();
+
+            System.out.print("Nota da disciplina " + (i+1) + ": ");
+            notas[i] = sc.nextDouble();
+
+            sc.nextLine(); // Consumindo o \n do buffer
+        }
+
+        // Criando objeto Aluno com as informações fornecidas pelo usuário
+        Aluno aluno = new Aluno(nome, matricula, curso, disciplinas, notas);
+
+        // Verificando se o aluno está aprovado em uma determinada disciplina
+        System.out.print("Digite o nome da disciplina para verificar se o aluno está aprovado: ");
+        String disciplina = sc.nextLine();
+
+        aluno.estaAprovado(disciplina);
+
+        sc.close();
+    }
+}
